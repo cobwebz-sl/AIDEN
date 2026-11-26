@@ -721,6 +721,23 @@ document.addEventListener("DOMContentLoaded", () => {
         ease: "fader",
         scrollTrigger: { trigger: root.querySelector("#featured-mix"), start: "top 80%", once: true },
       });
+
+      if (!prefersReducedMotion && isFinePointer) {
+        const tiltX = gsap.quickTo(featCover, "rotationY", { duration: 0.7, ease: "power3.out" });
+        const tiltY = gsap.quickTo(featCover, "rotationX", { duration: 0.7, ease: "power3.out" });
+        gsap.set(featCover, { transformPerspective: 900 });
+        featCover.addEventListener("pointermove", (e) => {
+          const r = featCover.getBoundingClientRect();
+          const nx = (e.clientX - r.left) / r.width - 0.5;
+          const ny = (e.clientY - r.top) / r.height - 0.5;
+          tiltX(nx * 7);
+          tiltY(-ny * 7);
+        });
+        featCover.addEventListener("pointerleave", () => {
+          tiltX(0);
+          tiltY(0);
+        });
+      }
     }
 
     gsap.from(root.querySelectorAll("[data-feat-in]"), {
@@ -1328,8 +1345,9 @@ document.addEventListener("DOMContentLoaded", () => {
         details,
       ].filter(Boolean).join("\n");
 
+      const waUrl = `https://wa.me/94778703991?text=${encodeURIComponent(text)}`;
       const copying = navigator.clipboard?.writeText(text);
-      window.open("https://ig.me/m/aidenmusic.lk", "_blank", "noopener");
+      window.open(waUrl, "_blank", "noopener");
       let copied = false;
       try {
         await copying;
@@ -1340,8 +1358,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       statusEl.className = "mt-4 min-h-[1.5em] text-[13px] text-white/75";
       statusEl.textContent = copied
-        ? "Message copied to clipboard! Paste it into the Instagram DM that just opened."
-        : "Instagram opened! Please paste your event details directly to @aidenmusic.lk.";
+        ? "WhatsApp opened with your booking message ready to send (also copied to clipboard)."
+        : "WhatsApp opened with your booking message ready to send.";
     });
   }
 
