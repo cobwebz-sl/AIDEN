@@ -316,10 +316,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const root = document.getElementById("home");
     if (!root) return;
     const ins = root.querySelectorAll("[data-hero-in]");
-    const meta = root.querySelectorAll("[data-hero-meta] > *");
 
     if (!heroMotion()) {
-      gsap.from([...meta, ...ins], { opacity: 0, duration: 0.8, stagger: 0.04 });
+      gsap.from(ins, { opacity: 0, duration: 0.8, stagger: 0.04 });
       return;
     }
 
@@ -330,7 +329,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .to(heroState, { e: 1, duration: 1.5, ease: "fader", onUpdate: renderHeroClip }, 0.5)
       .from(root.querySelector("[data-hero-imgwrap]"), { scale: 1.45, duration: 2.1, ease: "fader" }, 0.5)
       .from(ins, { opacity: 0, y: 26, duration: 0.9, stagger: 0.08 }, 0.95);
-    if (meta.length) tl.from(meta, { opacity: 0, y: 12, duration: 0.8, stagger: 0.06 }, 0.75);
   }
 
   function initHero() {
@@ -375,8 +373,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .to(root.querySelector("[data-hero-glow]"), { scale: 1.6, opacity: 0, ease: "none", duration: 0.6 }, 0)
         .to(root.querySelector("[data-hero-shade]"), { opacity: 1, ease: "none", duration: 0.5 }, 0.35)
         .to(root.querySelectorAll("[data-hero-line]"), { y: 0, yPercent: 0, duration: 0.32, stagger: 0.1, ease: "power2.out" }, 0.62);
-      const heroMeta = root.querySelector("[data-hero-meta]");
-      if (heroMeta) tl.to(heroMeta, { opacity: 0, y: -24, ease: "none", duration: 0.3 }, 0);
 
       // Pointer depth on the wordmark and glow
       if (isFinePointer) {
@@ -1293,17 +1289,6 @@ document.addEventListener("DOMContentLoaded", () => {
       duration: 0.9,
       scrollTrigger: { trigger: form, start: "top 85%", once: true },
     });
-
-    if (!prefersReducedMotion) {
-      const fig = root.querySelector("[data-book-figure]");
-      if (fig) {
-        gsap.fromTo(
-          fig,
-          { clipPath: "circle(0% at 50% 60%)" },
-          { clipPath: "circle(75% at 50% 50%)", duration: 1.8, ease: "fader", scrollTrigger: { trigger: fig, start: "top 85%", once: true } }
-        );
-      }
-    }
 
     // Chips selection
     const chips = form.querySelectorAll(".booking-chip");
