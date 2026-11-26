@@ -329,8 +329,8 @@ document.addEventListener("DOMContentLoaded", () => {
       .from(root.querySelectorAll("[data-hero-letter]"), { yPercent: 112, duration: 1.4, stagger: 0.07 }, 0.1)
       .to(heroState, { e: 1, duration: 1.5, ease: "fader", onUpdate: renderHeroClip }, 0.5)
       .from(root.querySelector("[data-hero-imgwrap]"), { scale: 1.45, duration: 2.1, ease: "fader" }, 0.5)
-      .from(meta, { opacity: 0, y: 12, duration: 0.8, stagger: 0.06 }, 0.75)
       .from(ins, { opacity: 0, y: 26, duration: 0.9, stagger: 0.08 }, 0.95);
+    if (meta.length) tl.from(meta, { opacity: 0, y: 12, duration: 0.8, stagger: 0.06 }, 0.75);
   }
 
   function initHero() {
@@ -372,10 +372,11 @@ document.addEventListener("DOMContentLoaded", () => {
         .to(root.querySelector('[data-hero-half="l"]'), { xPercent: -150, ease: "power1.in", duration: 0.75 }, 0)
         .to(root.querySelector('[data-hero-half="r"]'), { xPercent: 150, ease: "power1.in", duration: 0.75 }, 0)
         .to(root.querySelector("[data-hero-word]"), { opacity: 0, ease: "none", duration: 0.3 }, 0.45)
-        .to(root.querySelector("[data-hero-meta]"), { opacity: 0, y: -24, ease: "none", duration: 0.3 }, 0)
         .to(root.querySelector("[data-hero-glow]"), { scale: 1.6, opacity: 0, ease: "none", duration: 0.6 }, 0)
         .to(root.querySelector("[data-hero-shade]"), { opacity: 1, ease: "none", duration: 0.5 }, 0.35)
         .to(root.querySelectorAll("[data-hero-line]"), { y: 0, yPercent: 0, duration: 0.32, stagger: 0.1, ease: "power2.out" }, 0.62);
+      const heroMeta = root.querySelector("[data-hero-meta]");
+      if (heroMeta) tl.to(heroMeta, { opacity: 0, y: -24, ease: "none", duration: 0.3 }, 0);
 
       // Pointer depth on the wordmark and glow
       if (isFinePointer) {

@@ -165,6 +165,12 @@
 .nav-x__menu[aria-expanded="true"] .nav-x__burger i:last-child{transform:rotate(-45deg)}
 @media (min-width:48rem){.nav-x__book{display:inline-flex}}
 @media (min-width:64rem){.nav-x__clock{display:inline-flex}}
+@media (max-width:63.99rem){
+  .nav-x{grid-template-columns:1fr 1fr}
+  .nav-x__right{order:-1;justify-self:start}
+  .nav-x__logo{justify-self:end;text-align:right}
+  .nav-x__menu{flex-direction:row-reverse}
+}
 @media (max-width:30rem){.nav-x__menu-label{display:none}}
 
 /* full-screen menu on every size: two columns on desktop */
