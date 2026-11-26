@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+*.local
+
+# Camera originals are not served; the site uses the WebP files in assets/photos/.
+assets/images/
+assets/photos/*.JPG
+assets/photos/*.CR2
